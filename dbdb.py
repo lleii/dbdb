@@ -18,10 +18,11 @@ for t in [u"国产剧",u"综艺",u"美剧",u"英剧",u"韩剧",u"日剧",u"港�
 #page_limit = str(3)
 #for t in [u"国产剧"]:
     o = pd.read_excel(t+".xlsx","dbdb")
+    ll = len(o)
 
     url = "https://movie.douban.com/j/search_subjects?type=tv&tag=" + t + "&sort=rank&page_limit=" + page_limit + "&page_start=0"
     j = requests.get(url).json()
-    pprint (url)
+    print (t,ll,url)
     time.sleep(1)
 
     for i in j['subjects']:
@@ -29,9 +30,10 @@ for t in [u"国产剧",u"综艺",u"美剧",u"英剧",u"韩剧",u"日剧",u"港�
             c = requests.get("http://api.douban.com/v2/movie/subject/" + str(int(i["id"]))).json()
             time.sleep(60)#豆瓣:150次/h
             if 'ratings_count' in c: 
+                ll+=1
                 i.update(c)
                 #i["ratings_count"] = c["ratings_count"]
-                pprint (i)
+                print (t,ll,i["title"])
                 o = o.append(i, ignore_index=True) 
                 with pd.ExcelWriter(t+".xlsx") as writer:
                     o.to_excel(writer, sheet_name="dbdb")
