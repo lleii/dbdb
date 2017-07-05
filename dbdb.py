@@ -28,7 +28,6 @@ for t in [u"国产剧",u"综艺",u"美剧",u"英剧",u"韩剧",u"日剧",u"港�
     for i in j['subjects']:
         if int(i["id"]) not in o["id"].tolist():        
             c = requests.get("http://api.douban.com/v2/movie/subject/" + str(int(i["id"]))).json()
-            time.sleep(60)#豆瓣:150次/h
             if 'ratings_count' in c: 
                 ll+=1
                 i.update(c)
@@ -39,6 +38,7 @@ for t in [u"国产剧",u"综艺",u"美剧",u"英剧",u"韩剧",u"日剧",u"港�
                     o.to_excel(writer, sheet_name="dbdb")
             else:
                 break
+            time.sleep(60)#豆瓣:150次/h
 
 #    o = pd.read_excel(t+".xlsx","dbdb")
 #    with pd.ExcelWriter(t+".xlsx") as writer:
