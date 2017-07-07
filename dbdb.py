@@ -60,7 +60,7 @@ for t in all_tags:
 
         for i in j['subjects']:
             all_id.append(int(i["id"]))
-            pprint (len(all_id))
+            #pprint (len(all_id))
 
     for index in o.index:
         if o.ix[index, "id"] not in all_id:
