@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG,
                             datefmt='%m-%d %H:%M:%S'
                             )
 
-f=open(r'/Users/leili/my_cookies/douban','r')
+f=open(r'../douban','r')
 cookies={}  
 for line in f.read().split(';'):
     name,value=line.strip().split('=',1)
